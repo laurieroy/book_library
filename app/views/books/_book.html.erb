@@ -2,8 +2,7 @@
   <div class="card">
     <div class="card-image">
       <figure class="image is-3by4">
-				<%= link_to image_tag(book.thumbnail, 
-					alt: "#{ book.title } by #{ book.author }"), book %>
+				<%= link_to image_tag(book.thumbnail, alt: "#{ book.title } by #{ book.author }"), book %>
       </figure>
     </div>
     <div class="card-content">
@@ -15,19 +14,23 @@
       </div>
 
       <div class="content">
-			<%# removed the if subscribed, might want to put in a if logged in %>
-				<% if user_added_to_library?(current_user, book) %>
+				<% if logged in %>
 
-					<%= link_to 'Remove from library', add_book_path(book, type: "remove"), method: :put, class: "button is-danger is-fullwidth" %>
+					<% if user_added_to_library?(current_user, book) %>
 
-					<% if controller.controller_name == "library" %>
-						<%= link_to 'Download', '#', class:"button is-success is-fullwidth mt1" %>
+						<%= link_to 'Remove from library', add_book_path(book, type: "remove"), method: :put, class: "button is-danger is-fullwidth" %>
+
+						<% if controller.controller_name == "library" %>
+							<%= link_to 'Download', '#', class:"button is-success is-fullwidth mt1" %>
+						<% end %>
+
+						<% else %>
+							<%= link_to 'Add to library', add_book_path(book, type: "add"), method: :put, class: "button is-link is-fullwidth" %>
+						<% end %>
+
+					<% else %>
+						<%= link_to 'Add to library', new_user_registration_path(book, type: "add"), method: :put, class: "button is-link is-fullwidth" %>
 					<% end %>
-
-				<% else %>
-					<%= link_to 'Add to library', new_user_registration_path(book, type: "add"), method: :put, class: "button is-link is-fullwidth" %>
-				<% end %>
-
       </div>
     </div>
   </div>

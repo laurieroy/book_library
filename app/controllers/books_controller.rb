@@ -1,6 +1,7 @@
 class BooksController < ApplicationController
   before_action :set_book, only: %i[ show edit update destroy library]
-  before_action :authenticate_user!, except: %i[ show index]
+  before_action :authenticate_user!, except: %i[show index]
+
   # GET /books or /books.json
   def index
     @books = Book.all
@@ -59,6 +60,7 @@ class BooksController < ApplicationController
   # Add and remove books from/to library for current user
   def library
     type = params[:type]
+    
     if type == "add"
       current_user.library_additions << @book
       redirect_to library_index_path, notice: "#{@book.title} was added to your library"
@@ -79,6 +81,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :description, :author, :user_id)
+      params.require(:book).permit(:title, :description, :author, :thumbnail, :user_id)
     end
 end

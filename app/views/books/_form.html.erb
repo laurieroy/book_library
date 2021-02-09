@@ -1,37 +1,54 @@
-<%= form_with(model: book) do |form| %>
-  <% if book.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(book.errors.count, "error") %> prohibited this book from being saved:</h2>
+<%= simple_form_for @book, html: { multipart: true } do |f| %>
 
-      <ul>
-        <% book.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
+ <% f.error_notification %> 
+  # base or library?
+  <% f.error_notification message: f.object.errors[:library].to_sentence if f.object.errors[:library].present? %>  
+
+  <div class="field">
+    <div class="control">
+      <%= f.input :title, required: true, autofocus: true, wrapper: false, 
+        input_html: {class: "input"}, label_html: { class: "label" } %>
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_field :title %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description %>
+    <div class="control">
+      <%= f.input :description, required: true, autofocus: true, wrapper: false, 
+        input_html: {class: "textarea"}, label_html: { class: "label" } %>
+    </div>
+  </div>
+ 
+  <div class="field">
+    <div class="control">
+      <%= f.input :author, required: true, autofocus: true, wrapper: false, 
+        input_html: {class: "input"}, label_html: { class: "label" } %>
+    </div>
   </div>
 
   <div class="field">
-    <%= form.label :author %>
-    <%= form.text_field :author %>
+    <div class="control">
+      <div class="file">
+        <label class="file-label">
+          <%= f.input :thumbnail, as: :file, required: true, wrapper: false,
+            input_html: {class: "file-input"}, label: false %>
+            <span class="file-cta">
+              <span class="file-icon">
+                <i class="fa fa-upload"></i>
+              </span>
+              <span class="file-label">
+                Choose a thumbnail...
+              </span>
+            </span>
+        </label>
+      </div>
+    </div>
   </div>
+
 
   <%# <div class="field">
     <%= form.label :user_id %>
     <%#= form.number_field :user_id %>
   <%# </div> %>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+    <%= f.button :submit, class:"button is-dark"  %>
 <% end %>

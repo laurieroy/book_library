@@ -19,13 +19,9 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'devise'
-gem 'friendly_id', '~> 5.4', '>= 5.4.1'
-gem 'bulma-rails'
-gem 'name_of_person', '~> 1.1', '>= 1.1.1'
+
 # Use Active Storage variant
 gem 'image_processing', '~> 1.2'
-gem 'simple_form'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -33,8 +29,11 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  # Provides a better error page for Rails 
   gem 'better_errors'
+  # Guard is a command line tool to easily handle events on file system modifications.
   gem 'guard'
+  #  automatically reloads your browser when 'view' files are modified.
   gem 'guard-livereload'
   # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.4'
@@ -63,6 +62,15 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
-
-
-
+# Use Devise for user auth
+gem 'devise'
+# nicer blobs
+gem 'friendly_id', '~> 5.4', '>= 5.4.1'
+# Bulma for UI
+gem 'bulma-rails'
+# Name variations available, English language
+gem 'name_of_person', '~> 1.1', '>= 1.1.1'
+# Simple, efficient background processing for Ruby.
+# gem 'sidekiq'
+# Forms made easy
+gem 'simple_form'
